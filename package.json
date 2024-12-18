@@ -1,0 +1,37 @@
+{
+  "name": "auth-integrate",
+  "version": "2.0.0",
+  "description": "A reusable authentication middleware",
+  "main": "dist/auth.js",
+  "types": "dist/auth.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "npx tsx src/app.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "auth",
+    "middleware",
+    "jwt",
+    "postgres"
+  ],
+  "author": "Shubham Wawale",
+  "license": "MIT",
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/pg": "^8.11.10",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
