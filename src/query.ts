@@ -1,4 +1,4 @@
-import { Credentials, SignUpCredentials, Response, Messages } from "./types.js";
+import { Credentials, SignUpCredentials, Response, Messages } from "./types";
 import Database from "./postgres.js";
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { config } from "./config.js";
@@ -27,11 +27,10 @@ class Query {
         }
 
         const user = result.rows[0];
-        bcrypt.compare(credentials.password, user.password, function (err, result) {
-            if (!result) {
-                return buildResponse(false, Messages.CREDENTIALS_INVALID);
-            }
-        });
+        const isMatch = await bcrypt.compare(credentials.password, user.password);
+        if (!isMatch) {
+            return buildResponse(false, Messages.CREDENTIALS_INVALID);
+        }
 
         const payload = {
             userId: user.id,
@@ -61,10 +60,7 @@ class Query {
             return buildResponse(false, Messages.USER_ALREADY_EXISTS);
         }
         let query = 'INSERT INTO users (name, email, password, organization, roles) VALUES ($1, $2, $3, $4, $5)';
-        let password: string = "";
-        bcrypt.hash(credentials.password, 10, function (err, hash) {
-            password = hash;
-        });
+        const password: string = await bcrypt.hash(credentials.password, 10)
         let values = [
             credentials.name,
             credentials.email,
