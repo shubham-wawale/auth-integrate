@@ -2,9 +2,8 @@ name: Publish to npm
 
 on:
   push:
-    tags:
-      - 'v*.*.*'  # Only runs on version tags like v1.0.0
-
+    branches: [main]
+  
 jobs:
   publish:
     runs-on: ubuntu-latest
