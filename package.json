@@ -1,6 +1,6 @@
 {
   "name": "auth-integrate",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A reusable authentication middleware",
   "main": "dist/auth.js",
   "types": "dist/auth.d.ts",
